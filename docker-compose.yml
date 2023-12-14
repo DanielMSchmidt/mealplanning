@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15.3-alpine
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=loco
+      - POSTGRES_USER=loco
+      - POSTGRES_DB=loco_app
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ~/apps/redis:/data

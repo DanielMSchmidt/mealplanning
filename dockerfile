@@ -6,4 +6,4 @@ COPY . .
 
 RUN cargo build --release
 
-ENTRYPOINT ["./target/release/mealplanning"]
+ENTRYPOINT ["./target/release/mealplanning-cli", "start"]
