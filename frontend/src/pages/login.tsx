@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate, ActionFunction } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as api from "../api";
 
 type Errors = {
@@ -38,16 +38,6 @@ export function Login() {
         >
           <div className="flex flex-col space-y-1.5 p-6">
             <div className="text-center">
-              <span className="relative flex shrink-0 overflow-hidden rounded-full mx-auto h-12 w-auto">
-                <img
-                  className="aspect-square h-full w-full"
-                  alt="Meal Planner Logo"
-                  src="/placeholder.svg?height=48&amp;width=48"
-                />
-                <span className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-                  MP
-                </span>
-              </span>
               <h3 className="tracking-tight mt-6 text-center text-3xl font-extrabold text-gray-900">
                 Sign in to your account
               </h3>
@@ -59,7 +49,6 @@ export function Login() {
               <label
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 htmlFor="email"
-                color={errors.email ? "red" : "black"}
               >
                 Email
               </label>
@@ -72,12 +61,14 @@ export function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {errors.email ? (
+                <p className="text-sm text-red-500">{errors.email}</p>
+              ) : null}
             </div>
             <div className="space-y-2">
               <label
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 htmlFor="password"
-                color={errors.password ? "red" : "black"}
               >
                 Password
               </label>
@@ -89,6 +80,9 @@ export function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {errors.password ? (
+                <p className="text-sm text-red-500">{errors.password}</p>
+              ) : null}
             </div>
           </div>
           <div className="flex items-center p-6">
