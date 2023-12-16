@@ -1,7 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { RequireAuth } from "./auth";
 import { Landing } from "./pages/landing";
-import { Login, loginAction } from "./pages/login";
+import { Login } from "./pages/login";
 import { Home } from "./pages/home";
 
 export const routes: RouteObject[] = [
@@ -9,11 +9,11 @@ export const routes: RouteObject[] = [
   {
     path: "/login",
     element: <Login />,
-    action: loginAction,
   },
   //   { path: "/register", element: <Register /> },
   {
+    path: "/home",
     element: <RequireAuth />,
-    children: [{ path: "/", element: <Home /> }],
+    children: [{ path: "/home/dashboard", element: <Home /> }],
   },
 ];
