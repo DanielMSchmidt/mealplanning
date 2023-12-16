@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Navigate, useLocation } from "react-router";
+import { Outlet } from "react-router-dom";
 // A simple login API that authenticates a user and saves the token in
 // local storage. It provides methods for login, logout, and checking if the
 // user is logged in. It also provides a method to get the token for API calls.
@@ -25,8 +26,11 @@ export const getToken = () => {
   return localStorage.getItem("token");
 };
 
-// Function for the router
-export function RequireAuth({ children }: { children?: JSX.Element }) {
+export function RequireAuth({
+  children,
+}: {
+  children: JSX.Element;
+}): JSX.Element {
   const location = useLocation();
 
   if (!isLoggedIn()) {
@@ -37,5 +41,13 @@ export function RequireAuth({ children }: { children?: JSX.Element }) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  return <>children</>;
+  return children;
+}
+
+export function RequireAuthRoute() {
+  return (
+    <RequireAuth>
+      <Outlet />
+    </RequireAuth>
+  );
 }

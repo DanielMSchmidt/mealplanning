@@ -1,8 +1,8 @@
 import { RouteObject } from "react-router-dom";
-import { RequireAuth } from "./auth";
 import { Landing } from "./pages/landing";
 import { Login } from "./pages/login";
 import { Home } from "./pages/home";
+import { AppFrameRouteWithAuth } from "./components/appFrame";
 
 export const routes: RouteObject[] = [
   { path: "/", element: <Landing /> },
@@ -13,7 +13,7 @@ export const routes: RouteObject[] = [
   //   { path: "/register", element: <Register /> },
   {
     path: "/home",
-    element: <RequireAuth />,
-    children: [{ path: "/home/dashboard", element: <Home /> }],
+    element: <AppFrameRouteWithAuth />,
+    children: [{ index: true, element: <Home /> }],
   },
 ];
