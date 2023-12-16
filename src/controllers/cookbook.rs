@@ -26,8 +26,10 @@ async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
 
 pub async fn list(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Json<Vec<Model>>> {
     let user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
+    println!("user: {:?}", user);
 
     let cookbooks_of_user = user.find_related(Entity).all(&ctx.db).await?;
+    println!("cookbooks_of_user: {:?}", cookbooks_of_user);
 
     format::json(cookbooks_of_user)
 }
@@ -41,8 +43,9 @@ pub async fn add(
     let mut item = ActiveModel {
         ..Default::default()
     };
-    item.user_id = Set(user.id);
     params.update(&mut item);
+    println!("user: {:?}", user);
+    item.user_id = Set(user.id);
     let item = item.insert(&ctx.db).await?;
     format::json(item)
 }

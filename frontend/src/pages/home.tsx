@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Button } from "../components/button";
+import { useCookbooks } from "../api";
 
 export function Home() {
+  const cookbooks = useCookbooks();
   return (
     <>
       <section>
@@ -51,40 +53,39 @@ export function Home() {
         </div>
       </section>
       <section>
-        {/* Heading and button are on the same line, but the button is on the right */}
-
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold ">Your Cookbooks</h2>
-          <Button className="float-right">New Cookbook</Button>
+          <Button className="float-right" href="/cookbook/create">
+            New Cookbook
+          </Button>
         </div>
 
-        <div
-          className="rounded-lg border bg-card text-card-foreground shadow-sm p-4"
-          data-v0-t="card"
-        >
-          <div className="flex flex-col space-y-1.5 p-6 pb-2">
-            <h3 className="text-2xl font-semibold leading-none tracking-tight">
-              Favorites
-            </h3>
+        {cookbooks.map((cookbook) => (
+          <div
+            className="rounded-lg border bg-card text-card-foreground shadow-sm p-4"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6 pb-2">
+              <h3 className="text-2xl font-semibold leading-none tracking-tight">
+                {cookbook.title}
+              </h3>
+            </div>
+            <div className="p-6 grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Vegetarian Delights</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Healthy Breakfasts</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Quick &amp; Easy Dinners</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Low Carb Recipes</span>
+              </div>
+            </div>
           </div>
-          <div className="p-6 grid grid-cols-2 gap-4">
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Vegetarian Delights</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Healthy Breakfasts</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Quick &amp; Easy Dinners</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Low Carb Recipes</span>
-            </div>
-          </div>
-          <a className="text-blue-500 text-sm mt-4" href="#">
-            View All
-          </a>
-        </div>
+        ))}
       </section>
       <section className="col-span-full md:col-span-1">
         <h2 className="text-lg font-semibold mb-4">Shared Cookbooks</h2>
