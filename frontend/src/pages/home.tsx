@@ -51,7 +51,13 @@ export function Home() {
         </div>
       </section>
       <section>
-        <h2 className="text-lg font-semibold mb-4">Your Cookbooks</h2>
+        {/* Heading and button are on the same line, but the button is on the right */}
+
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold ">Your Cookbooks</h2>
+          <Button className="float-right">New Cookbook</Button>
+        </div>
+
         <div
           className="rounded-lg border bg-card text-card-foreground shadow-sm p-4"
           data-v0-t="card"
